@@ -14,7 +14,6 @@ use function long2ip;
 use function preg_match;
 use function str_contains;
 use function strlen;
-use function strpos;
 use function strrpos;
 use function substr;
 use function substr_count;
@@ -143,7 +142,7 @@ final class Ip extends AbstractValidator
             return $value === '::';
         }
 
-        if (strpos($value, '.') !== false) {
+        if (str_contains($value, '.')) {
             $lastcolon = strrpos($value, ':');
             if (! ($lastcolon !== false && $this->validateIPv4(substr($value, $lastcolon + 1)))) {
                 return false;

@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
 use function array_keys;
 use function array_shift;
 use function serialize;
-use function strstr;
+use function str_contains;
 use function unserialize;
 
 final class ValidatorChainTest extends TestCase
@@ -196,7 +196,7 @@ final class ValidatorChainTest extends TestCase
     #[Group('Laminas-2724')]
     public function handleNotFoundError(int $errnum, string $errstr): void
     {
-        if (strstr($errstr, 'No such file') !== false) {
+        if (str_contains($errstr, 'No such file')) {
             $this->error = true;
         }
     }
