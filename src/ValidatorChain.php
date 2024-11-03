@@ -180,7 +180,7 @@ final class ValidatorChain implements Countable, IteratorAggregate, ValidatorInt
             }
         }
 
-        $bc = $bc ?? $breakChainOnFailure;
+        $bc ??= $breakChainOnFailure;
 
         $this->attach($this->plugin($name, $options), $bc, $priority);
     }

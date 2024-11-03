@@ -2148,6 +2148,6 @@ final class Hostname extends AbstractValidator
             }
         }
 
-        return implode($decoded);
+        return implode('', $decoded);
     }
 }

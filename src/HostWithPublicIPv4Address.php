@@ -11,7 +11,6 @@ use function gethostbynamel;
 use function ip2long;
 use function is_array;
 use function is_string;
-use function pow;
 
 use const FILTER_FLAG_GLOBAL_RANGE;
 use const FILTER_FLAG_IPV4;
@@ -144,7 +143,7 @@ final class HostWithPublicIPv4Address extends AbstractValidator
         foreach (self::RESERVED_CIDR as $cidr) {
             $cidr    = explode('/', $cidr);
             $startIp = ip2long($cidr[0]);
-            $endIp   = ip2long($cidr[0]) + pow(2, 32 - (int) $cidr[1]) - 1;
+            $endIp   = ip2long($cidr[0]) + 2 ** (32 - (int) $cidr[1]) - 1;
 
             $int = ip2long($ip);
 

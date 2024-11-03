@@ -56,9 +56,8 @@ final class CallbackTest extends TestCase
         $givenContext = ['baz' => 'bat'];
         $validator    = new Callback([
             'throwExceptions' => true,
-            'callback'        => static function (mixed $value, array $context, string $foo) use ($givenContext): bool {
-                return $value === 'test' && $foo === 'foo' && $context === $givenContext;
-            },
+            'callback'        => static fn(mixed $value, array $context, string $foo): bool
+                => $value === 'test' && $foo === 'foo' && $context === $givenContext,
             'callbackOptions' => ['foo' => 'foo'],
         ]);
 
@@ -70,9 +69,8 @@ final class CallbackTest extends TestCase
         $givenContext = ['baz' => 'bat'];
         $validator    = new Callback([
             'throwExceptions' => true,
-            'callback'        => static function (mixed $value, array $context) use ($givenContext): bool {
-                return $value === 'test' && $context === $givenContext;
-            },
+            'callback'        => static fn(mixed $value, array $context): bool
+                => $value === 'test' && $context === $givenContext,
             'callbackOptions' => [],
         ]);
 
@@ -109,7 +107,7 @@ final class CallbackTest extends TestCase
         try {
             $validator->isValid('whatever');
             self::fail('An exception should have been thrown');
-        } catch (Throwable $error) {
+        } catch (Throwable) {
             self::assertSame('Callback Exception', $exception->getMessage());
         }
 
